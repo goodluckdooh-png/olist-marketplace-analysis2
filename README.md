@@ -1,6 +1,6 @@
 # Olist Marketplace Performance and Delivery Analysis
 
-**Tools:** SQL (SQLite), Python (pandas, SciPy, Matplotlib), Excel, Power BI
+**Tools:** SQL (SQLite), Python (pandas, SciPy, Matplotlib), Excel
 **Data:** [Olist Brazilian E-Commerce Public Dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) (8 tables, about 100k orders, 2016 to 2018)
 
 ## Business question
@@ -10,7 +10,7 @@ Olist is an online marketplace that connects sellers with customers. Which facto
 1. **SQL:** loaded 8 tables into SQLite, checked data quality, and built two analysis tables: one row per order (`order_fact`) and one row per item (`items_fact`). Only delivered orders with a delivery date were kept (96,470 orders). Orders with several reviews were averaged to one score (551 orders).
 2. **Python:** ran the analysis, a Spearman correlation and a Mann-Whitney test, and made the charts.
 3. **Excel:** a summary workbook with formulas (growth rates, shares, weighted averages, seller concentration).
-4. **Power BI:** dashboard built from the cleaned CSVs (steps below).
+
 
 Revenue means item price and excludes freight. The trend covers Jan 2017 to Aug 2018, because the months before and after are incomplete.
 

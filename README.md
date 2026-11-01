@@ -35,28 +35,4 @@ Revenue means item price and excludes freight. The trend covers Jan 2017 to Aug 
 - 74% of orders arrive 7+ days before the estimated date, so the estimates look padded and "on time" is generous.
 - Only customers who left a review are counted in the review analysis.
 
-## Power BI steps
-1. Get Data > Text/CSV > load `items_fact.csv` and `order_fact.csv`.
-2. Model view: relate the two tables on `order_id` (many items to one order).
-3. Add measures:
-   - Revenue = SUM(items_fact[price])
-   - Orders = DISTINCTCOUNT(items_fact[order_id])
-   - Avg Review = AVERAGE(order_fact[review_score])
-   - Late % = DIVIDE(CALCULATE(DISTINCTCOUNT(order_fact[order_id]), order_fact[delay_days] > 0), DISTINCTCOUNT(order_fact[order_id]))
-4. Page 1 visuals: KPI cards (Revenue, Orders, Avg Review, Late %), a line chart of Revenue by purchase_month, a bar chart of Revenue by category, a map or bar of Revenue by customer_state.
-5. Page 2 visuals: Avg Review by delivery bucket, Late % by month, a table of sellers with Revenue and Avg Review.
-6. Add slicers for purchase_month and customer_state.
 
-## Files
-- `olist_analysis.sql`: all SQL, including the two fact tables
-- `load.py`: loads the 8 CSVs into SQLite (put them in a `data/` folder)
-- `build.py`: runs the SQL file and creates the charts and CSV outputs
-- `make_xlsx.py`: builds the Excel workbook
-- `Olist_Analysis_Summary.xlsx`: summary workbook with formulas
-- `items_fact.csv`, `order_fact.csv`: cleaned tables for Power BI
-
-## Resume bullets
-- Analyzed 96,000+ marketplace orders (R$13.2M revenue) using SQL, Python and Excel to identify the drivers of revenue growth and customer satisfaction.
-- Found that late deliveries (8% of orders) cut average review scores from 4.3 to 2.6, and that 61 to 78% of orders delivered 4+ days late received 1 or 2 star reviews.
-- Linked delivery delay spikes (14 to 21% late rate in Nov 2017 and Feb to Mar 2018) to review score drops, and recommended peak-season capacity planning and realistic delivery estimates.
-- Showed that the top 10% of sellers produce 67% of revenue and that the top 3 states account for 63%, to support seller management and regional logistics priorities.
